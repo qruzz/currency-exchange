@@ -40,7 +40,6 @@ class App extends React.PureComponent {
 	 * 
 	 */
 	render() {
-		console.log(this.state);
 		const {
 			exchangeFromAmount,
 			exchangeFromCurrency,
@@ -53,11 +52,13 @@ class App extends React.PureComponent {
 					handleOnChange={this.handleOnChange}
 					value={exchangeFromAmount}
 					currency={exchangeFromCurrency}
+					type={'exchangeFromAmount'}
 				/>
 				<CurrencyInput
 					handleOnChange={this.handleOnChange}
 					value={exchangeToAmount}
 					currency={exchangeToCurrency}
+					type={'exchangeToAmount'}
 				/>
 				<Button
 					title={'Exchange'}

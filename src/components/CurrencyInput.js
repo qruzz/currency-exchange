@@ -24,6 +24,7 @@ class CurrencyInput extends React.PureComponent {
 				<InnerWrapper>
 					<Icon size={'large'} src={icon} />
 					<Input
+						type={'number'}
 						placeholder={'0'}
 						value={value}
 						onChange={(event) => {
@@ -59,7 +60,10 @@ const Icon = styled.img`
 
 const Input = styled.input`
 	width: 100%;
-	font-size: 3rem;
+	font-size: 3rem; 
+	appearance: none;
+	margin: 0; 
+}
 `;
 
 const Balance = styled.div`

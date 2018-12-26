@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-// TODO: Give the button a 'active' prop that will change the color and remove the onClick
-
 /**
  * This function returns a button component to be rendered. The function
  * takes the props objects as the only parameter and styles the button
@@ -17,7 +15,7 @@ function Button({ onClick, title, color, type, active }) {
 			color={color}
 			active={active}
 			type={type}
-			onClick={onClick}
+			onClick={active ? onClick : null}
 		>
 			<Title>{title}</Title>
 		</Wrapper>
@@ -41,15 +39,17 @@ Button.defaultProps = {
 };
 
 const Wrapper = styled.button`
+	width: ${props => props.type === 'primary' ? '100%' : '20%'};
+	height: 6vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: ${props => props.type === 'primary' ? '100%' : '20%'};
-	height: 6vh;
 	border-radius: calc(12vh / 2);
+	outline: none;
 	background: ${props => props.color};
 	opacity: ${props => props.active ? 1 : 0.4};
-	cursor: pointer;
+	cursor: ${props => props.active ? 'pointer' : 'default' };
+	
 
 	@media (min-width: 700px) {
 		width: 30%;
