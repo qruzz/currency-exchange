@@ -1,6 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Button from './components/Button';
 import CurrencyInput from './components/CurrencyInput';
+import RateIndicator from './components/RateIndicator';
 
 import { getLatestExchangeRates } from './services/api';
 
@@ -20,15 +23,7 @@ class App extends React.PureComponent {
 			exchangeFromAmount: '',
 			exchangeToCurrency: 'EUR',
 			exchangeToAmount: '',
-
 		};
-	}
-
-	componentDidMount() {
-		const { exchangeFromCurrency } = this.state;
-		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
-			console.log(result);
-		});
 	}
 
 	handleFromChange = (to, from, event) => {
@@ -39,12 +34,15 @@ class App extends React.PureComponent {
 
 		const { value } = event.target;
 
-		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
-			const { rates } = result;
-			const tempExcahnge = value * rates[exchangeToCurrency];
-			this.setState({
-				[to]: tempExcahnge.toFixed(2),
-				[from]: value,
+		this.setState({
+			[from]: value,
+		}, () => {
+			getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+				const { rates } = result;
+				const tempExchange = value * rates[exchangeToCurrency];
+				this.setState({
+					[to]: tempExchange === 0 ? '' : tempExchange.toFixed(2),
+				});
 			});
 		});
 	}
@@ -75,27 +73,47 @@ class App extends React.PureComponent {
 			exchangeToCurrency,
 		} = this.state;
 		return (
-			<div className="App">
-				<CurrencyInput
-					handleOnChange={this.handleFromChange}
-					value={exchangeFromAmount}
-					currency={exchangeFromCurrency}
-					to={'exchangeToAmount'}
-					from={'exchangeFromAmount'}
-				/>
-				<CurrencyInput
-					handleOnChange={this.handleOnChange}
-					value={exchangeToAmount}
-					currency={exchangeToCurrency}
-					type={'exchangeToAmount'}
-				/>
+			<Wrapper>
+				<CurrencyWrapper>
+					<CurrencyInput
+						handleOnChange={this.handleFromChange}
+						value={exchangeFromAmount}
+						currency={exchangeFromCurrency}
+						to={'exchangeToAmount'}
+						from={'exchangeFromAmount'}
+						style={{
+							color: '#FFFFFF',
+						}}
+					/>
+					<RateIndicator
+						from={exchangeFromCurrency}
+						to={exchangeToCurrency}
+						rate={'1,01'}
+					/>
+					<CurrencyInput
+						handleOnChange={this.handleOnChange}
+						value={exchangeToAmount}
+						currency={exchangeToCurrency}
+						type={'exchangeToAmount'}
+					/>
+				</CurrencyWrapper>
 				<Button
 					title={'Exchange'}
 					active={this.canExcange()}
 				/>
-			</div>
+			</Wrapper>
 		);
 	}
 }
+
+const Wrapper = styled.div`
+	background: #E8E9EC;
+	height: 100%;
+	width: 100%;
+`;
+
+const CurrencyWrapper = styled.div`
+	position: relative;
+`;
 
 export default App;

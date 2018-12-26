@@ -49,7 +49,7 @@ const Wrapper = styled.button`
 	background: ${props => props.color};
 	opacity: ${props => props.active ? 1 : 0.4};
 	cursor: ${props => props.active ? 'pointer' : 'default' };
-	
+	margin: 5% 0;
 
 	@media (min-width: 700px) {
 		width: 30%;
