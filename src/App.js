@@ -23,26 +23,48 @@ class App extends React.PureComponent {
 			exchangeFromAmount: '',
 			exchangeToCurrency: 'EUR',
 			exchangeToAmount: '',
+			exchangeRates: null,
 		};
 	}
 
+	/**
+	 * 
+	 */
+	componentDidMount() {
+		this.setExchangeRates();
+		const intervalID = setInterval(this.setExchangeRates, 10000);
+		this.setState({ intervalID });
+	}
+
+	/**
+	 * 
+	 */
+	componentWillUnmount() {
+		const { intervalID } = this.state;
+		clearInterval(intervalID);
+	}
+
+	setExchangeRates = () => {
+		const { exchangeFromCurrency } = this.state;
+		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+			this.setState({
+				exchangeRates: result,
+			});
+		});
+	}
+
 	handleFromChange = (to, from, event) => {
-		const {
-			exchangeFromCurrency,
-			exchangeToCurrency,
-		} = this.state;
+		const { exchangeToCurrency } = this.state;
 
 		const { value } = event.target;
 
 		this.setState({
 			[from]: value,
 		}, () => {
-			getLatestExchangeRates(exchangeFromCurrency).then((result) => {
-				const { rates } = result;
-				const tempExchange = value * rates[exchangeToCurrency];
-				this.setState({
-					[to]: tempExchange === 0 ? '' : tempExchange.toFixed(2),
-				});
+			const { exchangeRates } = this.state;
+			const tempExchange = value * exchangeRates.rates[exchangeToCurrency];
+			this.setState({
+				[to]: tempExchange === 0 ? '' : tempExchange.toFixed(2),
 			});
 		});
 	}
@@ -62,6 +84,20 @@ class App extends React.PureComponent {
 		return (true);
 	}
 
+	changeCurrency = (currency, value) => {
+		const { exchangeFromCurrency } = this.state;
+
+		const currencies = ['EUR', 'GBP', 'USD'];
+		const currentCurrencyIndex = currencies.indexOf(value);
+		const nextIndex = currentCurrencyIndex === 2 ? 0 : currentCurrencyIndex + 1;
+		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+			this.setState({
+				exchangeRates: result,
+				[currency]: currencies[nextIndex],
+			});
+		});
+	}
+
 	/**
 	 * 
 	 */
@@ -71,11 +107,14 @@ class App extends React.PureComponent {
 			exchangeFromCurrency,
 			exchangeToAmount,
 			exchangeToCurrency,
+			exchangeRates,
 		} = this.state;
+
 		return (
 			<Wrapper>
 				<CurrencyWrapper>
 					<CurrencyInput
+						changeCurrency={() => this.changeCurrency('exchangeFromCurrency', exchangeFromCurrency)}
 						handleOnChange={this.handleFromChange}
 						value={exchangeFromAmount}
 						currency={exchangeFromCurrency}
@@ -85,16 +124,28 @@ class App extends React.PureComponent {
 							color: '#FFFFFF',
 						}}
 					/>
-					<RateIndicator
-						from={exchangeFromCurrency}
-						to={exchangeToCurrency}
-						rate={'1,01'}
-					/>
+					{exchangeRates
+						? (
+							<RateIndicator
+								from={exchangeFromCurrency}
+								to={exchangeToCurrency}
+								rate={exchangeRates.rates[exchangeToCurrency]}
+							/>
+						)
+						: (null)
+					}
 					<CurrencyInput
-						handleOnChange={this.handleOnChange}
+						changeCurrency={() => this.changeCurrency('exchangeToCurrency', exchangeToCurrency)}
+						handleOnChange={this.handleFromChange}
 						value={exchangeToAmount}
-						currency={exchangeToCurrency}
 						type={'exchangeToAmount'}
+						currency={exchangeToCurrency}
+						to={'exchangeFromAmount'}
+						from={'exchangeToAmount'}
+						style={{
+							color: '#FFFFFF',
+							background: 'transparent',
+						}}
 					/>
 				</CurrencyWrapper>
 				<Button

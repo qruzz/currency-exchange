@@ -17,6 +17,7 @@ class CurrencyInput extends React.PureComponent {
 			value,
 			handleOnChange,
 			currency,
+			changeCurrency,
 			style,
 		} = this.props;
 		const icon = require(`../resources/icons/${currency}.svg`);
@@ -24,8 +25,13 @@ class CurrencyInput extends React.PureComponent {
 		return (
 			<Wrapper style={style}>
 				<InnerWrapper>
-					<Icon size={'large'} src={icon} />
-					<p>{currency}</p>
+					<Indicator>
+						<IndicatorButton onClick={changeCurrency}>
+							<Icon size={'large'} src={icon} />
+							<p>{currency}</p>
+						</IndicatorButton>
+						<Balance>Balance: {balance}</Balance>
+					</Indicator>
 					<Input
 						type={'number'}
 						placeholder={'0'}
@@ -60,6 +66,8 @@ const InnerWrapper = styled.div`
 `;
 
 const Icon = styled.img`
+	width: 100%;
+	margin-right: 15px;
 	height: ${props => props.size === 'small' ? '10%' : '30%'}
 `;
 
@@ -69,18 +77,31 @@ const Input = styled.input`
 	appearance: none;
 	margin: 0;
 	background-color: transparent;
-	outline: none;
 	text-align: right;
-}
+`;
+
+const Indicator = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 30px;
+`;
+
+const IndicatorButton = styled.button`
+	display: flex;
+	align-items: center;
+	height: 100%;
+	background-color: transparent;
+	cursor: pointer;
 `;
 
 const Balance = styled.div`
-
+	width: 20vw;
 `;
 
 // Verify the passed through Props
 CurrencyInput.propTypes = {
-	value: PropTypes.number.isRequired,
+	value: PropTypes.string.isRequired,
 	handleOnChange: PropTypes.func.isRequired,
 	to: PropTypes.string.isRequired,
 	from: PropTypes.string.isRequired,
