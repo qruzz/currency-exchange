@@ -2,6 +2,8 @@ import React from 'react';
 import Button from './components/Button';
 import CurrencyInput from './components/CurrencyInput';
 
+import { getLatestExchangeRates } from './services/api';
+
 /**
  * 
  */
@@ -18,11 +20,37 @@ class App extends React.PureComponent {
 			exchangeFromAmount: '',
 			exchangeToCurrency: 'EUR',
 			exchangeToAmount: '',
+
 		};
 	}
 
+	componentDidMount() {
+		const { exchangeFromCurrency } = this.state;
+		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+			console.log(result);
+		});
+	}
+
+	handleFromChange = (to, from, event) => {
+		const {
+			exchangeFromCurrency,
+			exchangeToCurrency,
+		} = this.state;
+
+		const { value } = event.target;
+
+		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+			const { rates } = result;
+			const tempExcahnge = value * rates[exchangeToCurrency];
+			this.setState({
+				[to]: tempExcahnge.toFixed(2),
+				[from]: value,
+			});
+		});
+	}
+
 	handleOnChange = (type, event) => {
-		const value = event.target.value;
+		const { value } = event.target;
 		this.setState({ [type]: value });
 	}
 
@@ -49,10 +77,11 @@ class App extends React.PureComponent {
 		return (
 			<div className="App">
 				<CurrencyInput
-					handleOnChange={this.handleOnChange}
+					handleOnChange={this.handleFromChange}
 					value={exchangeFromAmount}
 					currency={exchangeFromCurrency}
-					type={'exchangeFromAmount'}
+					to={'exchangeToAmount'}
+					from={'exchangeFromAmount'}
 				/>
 				<CurrencyInput
 					handleOnChange={this.handleOnChange}

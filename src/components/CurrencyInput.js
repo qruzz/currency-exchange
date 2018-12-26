@@ -12,7 +12,8 @@ class CurrencyInput extends React.PureComponent {
 	 */
 	render() {
 		const {
-			type,
+			to,
+			from,
 			value,
 			handleOnChange,
 			currency,
@@ -28,7 +29,7 @@ class CurrencyInput extends React.PureComponent {
 						placeholder={'0'}
 						value={value}
 						onChange={(event) => {
-							handleOnChange(type, event);
+							handleOnChange(to, from, event);
 						}}
 					/>
 				</InnerWrapper>
@@ -74,8 +75,8 @@ const Balance = styled.div`
 CurrencyInput.propTypes = {
 	value: PropTypes.number.isRequired,
 	handleOnChange: PropTypes.func.isRequired,
+	type: PropTypes.string.isRequired,
 	currency: PropTypes.string,
-	type: PropTypes.string,
 };
 
 // Define the default PropTypes
