@@ -159,8 +159,9 @@ class App extends React.PureComponent {
 		return (true);
 	}
 
+	// TODO: Write this function
 	exchangeBetweenCurrencies = () => {
-
+		console.log('hi');
 	}
 
 	/**
@@ -277,6 +278,7 @@ class App extends React.PureComponent {
 				<Button
 					title={'Exchange'}
 					active={this.canExcange()}
+					onClick={this.exchangeBetweenCurrencies()}
 				/>
 			</Wrapper>
 		);

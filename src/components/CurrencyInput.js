@@ -72,9 +72,9 @@ CurrencyInput.propTypes = {
 	changeCurrency: PropTypes.func.isRequired,
 	currency: PropTypes.string,
 	balance: PropTypes.shape({
-		GBP: PropTypes.string,
-		EUR: PropTypes.string,
-		USD: PropTypes.string,
+		GBP: PropTypes.number,
+		EUR: PropTypes.number,
+		USD: PropTypes.number,
 	}),
 	style: PropTypes.shape({
 		background: PropTypes.string,
