@@ -18,10 +18,15 @@ class CurrencyInput extends React.PureComponent {
 			handleOnChange,
 			currency,
 			changeCurrency,
+			balance,
 			style,
 		} = this.props;
 		const icon = require(`../resources/icons/${currency}.svg`);
-		const balance = 400;
+		const disabled = to === 'exchangeFromAmount';
+		let actualBalance = 0;
+		if (balance) {
+			actualBalance = balance[currency];
+		}
 		return (
 			<Wrapper style={style}>
 				<InnerWrapper>
@@ -30,12 +35,13 @@ class CurrencyInput extends React.PureComponent {
 							<Icon size={'large'} src={icon} />
 							<p>{currency}</p>
 						</IndicatorButton>
-						<Balance>Balance: {balance}</Balance>
+						<Balance>Balance: {actualBalance}</Balance>
 					</Indicator>
 					<Input
 						type={'number'}
 						placeholder={'0'}
 						value={value}
+						disabled={disabled}
 						onChange={(event) => {
 							handleOnChange(to, from, event);
 						}}
@@ -52,6 +58,7 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 10vh;
 	background: ${props => props.style.color};
+	padding: 5% 0;
 
 	@media (min-width: 700px) {
 		width: 45%;
@@ -97,6 +104,7 @@ const IndicatorButton = styled.button`
 
 const Balance = styled.div`
 	width: 20vw;
+	color: black;
 `;
 
 // Verify the passed through Props
@@ -107,6 +115,11 @@ CurrencyInput.propTypes = {
 	from: PropTypes.string.isRequired,
 	changeCurrency: PropTypes.func.isRequired,
 	currency: PropTypes.string,
+	balance: PropTypes.shape({
+		GBP: PropTypes.string,
+		EUR: PropTypes.string,
+		USD: PropTypes.string,
+	}),
 	style: PropTypes.shape({
 		color: PropTypes.string,
 	}),
@@ -115,6 +128,7 @@ CurrencyInput.propTypes = {
 // Define the default PropTypes
 CurrencyInput.defaultProps = {
 	currency: 'GBP',
+	balance: null,
 	style: {
 		color: 'transparent',
 	},

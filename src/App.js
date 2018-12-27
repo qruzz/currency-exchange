@@ -24,6 +24,7 @@ class App extends React.PureComponent {
 			exchangeToCurrency: 'EUR',
 			exchangeToAmount: '',
 			exchangeRates: null,
+			balance: null,
 		};
 	}
 
@@ -33,7 +34,22 @@ class App extends React.PureComponent {
 	componentDidMount() {
 		this.setExchangeRates();
 		const intervalID = setInterval(this.setExchangeRates, 10000);
-		this.setState({ intervalID });
+
+		let balance = JSON.parse(localStorage.getItem('@user:balance')) || null;
+
+		if (!balance) {
+			balance = {
+				USD: 100,
+				EUR: 400,
+				GBP: 341,
+			};
+			localStorage.setItem('@user:balance', JSON.stringify(balance));
+		}
+
+		this.setState({
+			intervalID,
+			balance,
+		});
 	}
 
 	/**
@@ -55,7 +71,6 @@ class App extends React.PureComponent {
 
 	handleFromChange = (to, from, event) => {
 		const { exchangeToCurrency } = this.state;
-
 		const { value } = event.target;
 
 		this.setState({
@@ -69,15 +84,19 @@ class App extends React.PureComponent {
 		});
 	}
 
-	handleOnChange = (type, event) => {
-		const { value } = event.target;
-		this.setState({ [type]: value });
-	}
-
 	canExcange = () => {
-		const { exchangeFromAmount, exchangeToAmount } = this.state;
+		const {
+			exchangeFromCurrency,
+			exchangeToCurrency,
+			exchangeFromAmount,
+			exchangeToAmount,
+		} = this.state;
 
 		if (exchangeFromAmount === '' || exchangeToAmount === '') {
+			return (false);
+		}
+
+		if (exchangeFromCurrency === exchangeToCurrency) {
 			return (false);
 		}
 
@@ -85,7 +104,11 @@ class App extends React.PureComponent {
 	}
 
 	changeCurrency = (currency, value) => {
-		const { exchangeFromCurrency } = this.state;
+		const {
+			exchangeFromCurrency,
+			exchangeFromAmount,
+			exchangeToCurrency,
+		} = this.state;
 
 		let base = null;
 		const currencies = ['EUR', 'GBP', 'USD'];
@@ -97,9 +120,21 @@ class App extends React.PureComponent {
 			base = exchangeFromCurrency;
 		}
 		getLatestExchangeRates(base).then((result) => {
-			console.log(result);
+			let exchangedValue = null;
+
+			if (currency === 'exchangeFromCurrency') {
+				if (base === exchangeToCurrency) {
+					exchangedValue = exchangeFromAmount * 1;
+				} else {
+					exchangedValue = (exchangeFromAmount * result.rates[exchangeToCurrency]).toFixed(2);
+				}
+			} else {
+				exchangedValue = (exchangeFromAmount * result.rates[currencies[nextIndex]]).toFixed(2);
+			}
+
 			this.setState({
 				exchangeRates: result,
+				exchangeToAmount: exchangedValue,
 				[currency]: currencies[nextIndex],
 			});
 		});
@@ -115,6 +150,7 @@ class App extends React.PureComponent {
 			exchangeToAmount,
 			exchangeToCurrency,
 			exchangeRates,
+			balance,
 		} = this.state;
 
 		return (
@@ -127,6 +163,7 @@ class App extends React.PureComponent {
 						currency={exchangeFromCurrency}
 						to={'exchangeToAmount'}
 						from={'exchangeFromAmount'}
+						balance={balance}
 						style={{
 							color: '#FFFFFF',
 						}}
@@ -145,10 +182,10 @@ class App extends React.PureComponent {
 						changeCurrency={() => this.changeCurrency('exchangeToCurrency', exchangeToCurrency)}
 						handleOnChange={this.handleFromChange}
 						value={exchangeToAmount}
-						type={'exchangeToAmount'}
 						currency={exchangeToCurrency}
 						to={'exchangeFromAmount'}
 						from={'exchangeToAmount'}
+						balance={balance}
 						style={{
 							color: '#FFFFFF',
 							background: 'transparent',
