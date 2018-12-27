@@ -87,10 +87,17 @@ class App extends React.PureComponent {
 	changeCurrency = (currency, value) => {
 		const { exchangeFromCurrency } = this.state;
 
+		let base = null;
 		const currencies = ['EUR', 'GBP', 'USD'];
 		const currentCurrencyIndex = currencies.indexOf(value);
 		const nextIndex = currentCurrencyIndex === 2 ? 0 : currentCurrencyIndex + 1;
-		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
+		if (currency === 'exchangeFromCurrency') {
+			base = currencies[nextIndex];
+		} else {
+			base = exchangeFromCurrency;
+		}
+		getLatestExchangeRates(base).then((result) => {
+			console.log(result);
 			this.setState({
 				exchangeRates: result,
 				[currency]: currencies[nextIndex],

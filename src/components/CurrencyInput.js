@@ -105,6 +105,7 @@ CurrencyInput.propTypes = {
 	handleOnChange: PropTypes.func.isRequired,
 	to: PropTypes.string.isRequired,
 	from: PropTypes.string.isRequired,
+	changeCurrency: PropTypes.func.isRequired,
 	currency: PropTypes.string,
 	style: PropTypes.shape({
 		color: PropTypes.string,

@@ -14,6 +14,8 @@ function RateIndicator({ from, to, rate }) {
 		} else {
 			string = `${from}1 = ${to}${1}`;
 		}
+	} else {
+		string = `${from}1 = ${to}${1}`;
 	}
 
 	return (
