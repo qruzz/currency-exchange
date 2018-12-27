@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button tests renders a button 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): ShallowWrapper {
+    Symbol(enzyme.__root__): [Circular],
+    Symbol(enzyme.__unrendered__): <Button
+      active={false}
+      color="#EB008D"
+      type="primary"
+    />,
+    Symbol(enzyme.__renderer__): Object {
+      "batchedUpdates": [Function],
+      "getNode": [Function],
+      "render": [Function],
+      "simulateError": [Function],
+      "simulateEvent": [Function],
+      "unmount": [Function],
+    },
+    Symbol(enzyme.__node__): Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "active": false,
+        "children": <ForwardRef />,
+        "color": "#EB008D",
+        "onClick": null,
+        "type": "primary",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+	color: #FFFFFF;
+",
+            ],
+          },
+          "displayName": "styled.span",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "span",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": false,
+          "rules": Array [
+            "
+	width: ",
+            [Function],
+            ";
+	height: 6vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: calc(12vh / 2);
+	outline: none;
+	background: ",
+            [Function],
+            ";
+	opacity: ",
+            [Function],
+            ";
+	cursor: ",
+            [Function],
+            ";
+	margin: 5% 0;
+
+	@media (min-width: 700px) {
+		width: 30%;
+	}
+",
+          ],
+        },
+        "displayName": "styled.button",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "button",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+    Symbol(enzyme.__nodes__): Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "active": false,
+          "children": <ForwardRef />,
+          "color": "#EB008D",
+          "onClick": null,
+          "type": "primary",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "rules": Array [
+                "
+	color: #FFFFFF;
+",
+              ],
+            },
+            "displayName": "styled.span",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "span",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
+        },
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "rules": Array [
+              "
+	width: ",
+              [Function],
+              ";
+	height: 6vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: calc(12vh / 2);
+	outline: none;
+	background: ",
+              [Function],
+              ";
+	opacity: ",
+              [Function],
+              ";
+	cursor: ",
+              [Function],
+              ";
+	margin: 5% 0;
+
+	@media (min-width: 700px) {
+		width: 30%;
+	}
+",
+            ],
+          },
+          "displayName": "styled.button",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "button",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+    ],
+    Symbol(enzyme.__options__): Object {
+      "adapter": ReactSixteenAdapter {
+        "options": Object {
+          "enableComponentDidUpdateOnSetState": true,
+          "lifecycles": Object {
+            "componentDidUpdate": Object {
+              "onSetState": true,
+            },
+            "getDerivedStateFromProps": true,
+            "getSnapshotBeforeUpdate": true,
+            "setState": Object {
+              "skipsComponentDidUpdateOnNullish": true,
+            },
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__unrendered__): null,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): undefined,
+  Symbol(enzyme.__nodes__): Array [],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__rootNodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "active": false,
+        "children": <ForwardRef />,
+        "color": "#EB008D",
+        "onClick": null,
+        "type": "primary",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "rules": Array [
+              "
+	color: #FFFFFF;
+",
+            ],
+          },
+          "displayName": "styled.span",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "span",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
+      },
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": false,
+          "rules": Array [
+            "
+	width: ",
+            [Function],
+            ";
+	height: 6vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: calc(12vh / 2);
+	outline: none;
+	background: ",
+            [Function],
+            ";
+	opacity: ",
+            [Function],
+            ";
+	cursor: ",
+            [Function],
+            ";
+	margin: 5% 0;
+
+	@media (min-width: 700px) {
+		width: 30%;
+	}
+",
+          ],
+        },
+        "displayName": "styled.button",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "button",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
+    },
+  ],
+}
+`;
