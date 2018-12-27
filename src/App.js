@@ -159,9 +159,34 @@ class App extends React.PureComponent {
 		return (true);
 	}
 
-	// TODO: Write this function
+	
 	exchangeBetweenCurrencies = () => {
-		console.log('hi');
+		const {
+			exchangeFromAmount,
+			exchangeFromCurrency,
+			exchangeToAmount,
+			exchangeToCurrency,
+			balance,
+		} = this.state;
+
+		let newFromBalance = 0;
+		let newToBalance = 0;
+		const currentFromBalance = balance[exchangeFromCurrency];
+		const currentToBalance = balance[exchangeToCurrency];
+		if (currentFromBalance > exchangeFromAmount) {
+			newFromBalance = currentFromBalance - exchangeFromAmount;
+			newToBalance = currentToBalance + Number(exchangeToAmount);
+
+			this.setState(prevState => ({
+				balance: {
+					...prevState.balance,
+					[exchangeFromCurrency]: newFromBalance,
+					[exchangeToCurrency]: newToBalance,
+				},
+			}), () => {
+				localStorage.setItem('@user:balance', JSON.stringify(balance));
+			});
+		}
 	}
 
 	/**
@@ -278,7 +303,7 @@ class App extends React.PureComponent {
 				<Button
 					title={'Exchange'}
 					active={this.canExcange()}
-					onClick={this.exchangeBetweenCurrencies()}
+					onClick={this.exchangeBetweenCurrencies}
 				/>
 			</Wrapper>
 		);
