@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 /**
- * This function returns a button component to be rendered. The function
- * takes the props objects as the only parameter and styles the button
- * accordingly. The button will fire an onclick function, if passed through.
+ * This function returns a Button component to be rendered. The function
+ * takes the arguments and renders the button acordingly. The button will
+ * fire an onclick function, if passed through.
  * @param	{func}		onClick	The function for the button action
  * @param	{string}	title	The button text
  * @param	{string}	color	The colour of the button
  * @param	{string}	type	The type of button (primary/secondary)
  * @param	{bool}		active	Determines if the button is active or not
- * @returns	{jsx}				Returns the button component
+ * @returns	{jsx}				Returns the Button component
  */
-function Button({ onClick, title, color, type, active }) {
+function Button({
+	onClick,
+	title,
+	color,
+	type,
+	active,
+}) {
 	return (
 		<Wrapper
 			color={color}

@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-// TODO: Change this to a stateless component, as it does not use the state for anything
-
 /**
- * 
- * @param {*} param0 
+ * This function returns a CurrencyInput component to be rendered. The component
+ * is controlled by the arguments, handling only the rendering of the information.
+ * @param	{string}	to				The currency to convert to
+ * @param	{string}	from			The currency to convert from
+ * @param	{string}	value			The value of the input field
+ * @param	{func}		handleOnChange	The function to be fired on input change
+ * @param	{string}	currency		The currency shorthand (eg. GBP)
+ * @param	{func}		changeCurrency	The function to be fired changing the currency
+ * @param	{object}	balance			The object containing the account balances
+ * @param	{object}	style			The style object containing specific styles
+ * @returns	{jsx}						Returns the CurrencyInput component
  */
 function CurrencyInput({
 	to,
@@ -26,6 +33,7 @@ function CurrencyInput({
 
 	// Initiate the actual balance
 	let actualBalance = 0;
+
 	// If a balance is passed through, set the actual balance based on the currency in use
 	if (balance) {
 		actualBalance = balance[currency];
@@ -54,60 +62,6 @@ function CurrencyInput({
 		</Wrapper>
 	);
 }
-
-// class CurrencyInput extends React.PureComponent {
-// 	/**
-// 	 * 
-// 	 */
-// 	render() {
-// 		const {
-// 			to,
-// 			from,
-// 			value,
-// 			handleOnChange,
-// 			currency,
-// 			changeCurrency,
-// 			balance,
-// 			style,
-// 		} = this.props;
-
-// 		// Dynamic import of the icon based on which currency is used
-// 		const icon = require(`../resources/icons/${currency}.svg`);
-
-// 		// Disable the 'to' input
-// 		const disabled = to === 'exchangeFromAmount';
-
-// 		// Initiate the actual balance
-// 		let actualBalance = 0;
-// 		// If a balance is passed through, set the actual balance based on the currency in use
-// 		if (balance) {
-// 			actualBalance = balance[currency];
-// 		}
-
-// 		return (
-// 			<Wrapper style={style}>
-// 				<InnerWrapper>
-// 					<Indicator>
-// 						<IndicatorButton onClick={changeCurrency}>
-// 							<Icon size={'large'} src={icon} />
-// 							<p>{currency}</p>
-// 						</IndicatorButton>
-// 						<Balance>Balance: {actualBalance}</Balance>
-// 					</Indicator>
-// 					<Input
-// 						type={'number'}
-// 						placeholder={'0'}
-// 						value={value}
-// 						disabled={disabled}
-// 						onChange={(event) => {
-// 							handleOnChange(to, from, event);
-// 						}}
-// 					/>
-// 				</InnerWrapper>
-// 			</Wrapper>
-// 		);
-// 	}
-// }
 
 // Verify the passed through Props
 CurrencyInput.propTypes = {
