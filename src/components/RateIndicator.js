@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 /**
- * 
+ * This function returns the RateIndicator component to be rendered. It uses
+ * the parameters to construct a string showing the to and from currency, as
+ * well as the exchange rate.
+ * @param	{string}	from	The currency to exchange from
+ * @param	{string}	to		The currency to exchange to
+ * @param	{number}	rate	The exchange rate between 'from' and 'to'
+ * @returns	{jsx}				Returns the RateIndicator component
  */
 function RateIndicator({ from, to, rate }) {
 	let string = '';
 
+	// Determine which string to render
 	if (from && to && rate) {
 		if (from !== to) {
 			string = `${from}1 = ${to}${rate.toFixed(2)}`;
@@ -25,12 +32,14 @@ function RateIndicator({ from, to, rate }) {
 	);
 }
 
+// Verify the passed through Props
 RateIndicator.propTypes = {
 	rate: PropTypes.number.isRequired,
 	from: PropTypes.string,
 	to: PropTypes.string,
 };
 
+// Define the default PropTypes
 RateIndicator.defaultProps = {
 	from: 'GBP',
 	to: 'EUR',

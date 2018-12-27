@@ -103,6 +103,10 @@ class App extends React.PureComponent {
 		return (true);
 	}
 
+	exchangeBetweenCurrencies = () => {
+		
+	}
+
 	changeCurrency = (currency, value) => {
 		const {
 			exchangeFromCurrency,
