@@ -49,16 +49,16 @@ Button.defaultProps = {
 };
 
 const Wrapper = styled.button`
-	width: ${props => props.type === 'primary' ? '100%' : '20%'};
+	width: ${props => (props.type === 'primary' ? '100%' : '20%')};
 	height: 6vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: calc(12vh / 2);
 	outline: none;
-	background: ${props => props.color};
-	opacity: ${props => props.active ? 1 : 0.4};
-	cursor: ${props => props.active ? 'pointer' : 'default' };
+	background: ${props => (props.color)};
+	opacity: ${props => (props.active ? 1 : 0.4)};
+	cursor: ${props => (props.active ? 'pointer' : 'default')};
 	margin: 5% 0;
 
 	@media (min-width: 700px) {

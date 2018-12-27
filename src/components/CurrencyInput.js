@@ -115,7 +115,7 @@ const InnerWrapper = styled.div`
 const Icon = styled.img`
 	width: 100%;
 	margin-right: 15px;
-	height: ${props => props.size === 'small' ? '10%' : '30%'}
+	height: ${props => (props.size === 'small' ? '10%' : '30%')}
 `;
 
 const Input = styled.input`

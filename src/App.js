@@ -8,15 +8,19 @@ import RateIndicator from './components/RateIndicator';
 import { getLatestExchangeRates } from './services/api';
 
 /**
- * 
+ * This class represents the whole application. It handles the logic for lower
+ * level and stateless components which it inejects into the its render function.
+ * The application renders the functionality to exchange a value from one currency
+ * to another based exchange rate, updated every 10 seconds.
+ * @returns	{jsx}		The App component
  */
 class App extends React.PureComponent {
 	/**
-	 * 
-	 * @param {*} props 
+	 * The constructor initialises the global state three for the application.
+	 * It also defines any constants that should be available in the 'this' scope.
 	 */
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 
 		this.state = {
 			exchangeFromCurrency: 'GBP',
@@ -159,6 +163,15 @@ class App extends React.PureComponent {
 
 	}
 
+	/**
+	 * This function handles changing the logic behind changing the currencies to
+	 * be exchanged. The function is to be attached as a button action, and it
+	 * will cycle through the currencies, updating the exchange rates and the
+	 * typed inputs. It will apply the updates to the state.
+	 * @param	{string}	currency	The state to change
+	 * @param	{string}	value		The shorthand of the currency to change
+	 * @returns	{void}
+	 */
 	changeCurrency = (currency, value) => {
 		const {
 			exchangeFromCurrency,
@@ -168,16 +181,25 @@ class App extends React.PureComponent {
 
 		let base = null;
 		const currencies = ['EUR', 'GBP', 'USD'];
+
+		// Find the shorthand for the value to change in the currencies array
 		const currentCurrencyIndex = currencies.indexOf(value);
+
+		// Get the next index of the next currency in the currencies array
 		const nextIndex = currentCurrencyIndex === 2 ? 0 : currentCurrencyIndex + 1;
+
+		// Set the appropriate base currency for the API call
 		if (currency === 'exchangeFromCurrency') {
 			base = currencies[nextIndex];
 		} else {
 			base = exchangeFromCurrency;
 		}
+
+		// Get the latest exchange rates for the new base currency
 		getLatestExchangeRates(base).then((result) => {
 			let exchangedValue = null;
 
+			// Calculate the new 'exchangeToAmount' based on the typed value and the exchange rates
 			if (currency === 'exchangeFromCurrency') {
 				if (base === exchangeToCurrency) {
 					exchangedValue = exchangeFromAmount * 1;
@@ -188,6 +210,7 @@ class App extends React.PureComponent {
 				exchangedValue = (exchangeFromAmount * result.rates[currencies[nextIndex]]).toFixed(2);
 			}
 
+			// Set the new exchange rates and exchange values in state
 			this.setState({
 				exchangeRates: result,
 				exchangeToAmount: exchangedValue,
@@ -197,7 +220,10 @@ class App extends React.PureComponent {
 	}
 
 	/**
-	 * 
+	 * This function renders the App and all its children. This can be passed in
+	 * as a component to any pre-existing application. It will be reponsive to the
+	 * the container in which it is renderd.
+	 * @returns	{jsx}	The App component
 	 */
 	render() {
 		const {

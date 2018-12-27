@@ -10,7 +10,7 @@
 	"rules": {
 		"arrow-body-style": [
 			"error",
-			"always"
+			"as-needed"
 		],
 		"react/jsx-filename-extension": [
 			"error",
@@ -47,6 +47,16 @@
 		"no-tabs": 0,
 		"react/jsx-indent": false,
 		"react/jsx-indent-props": false,
+		"react/jsx-curly-brace-presence": [
+			"always",
+			{
+				"props": "always",
+				"children": "never"
+			}
+		],
+		"react/jsx-one-expression-per-line": false,
+		"import/no-dynamic-require": false,
+		"global-require": 0,
 		"no-use-before-define": [
 			"error",
 			{
