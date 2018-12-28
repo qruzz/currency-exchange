@@ -159,7 +159,13 @@ class App extends React.PureComponent {
 		return (true);
 	}
 
-	
+	/**
+	 * This function handles the actual logic behind exchanging from one currency
+	 * to another. It also handles the adding and subtracting the amount from the
+	 * account balances. It updates balances in state, and stores the new balance
+	 * in localStorage allowing them to persist between sessions.
+	 * @returns {void}
+	 */
 	exchangeBetweenCurrencies = () => {
 		const {
 			exchangeFromAmount,
@@ -173,6 +179,8 @@ class App extends React.PureComponent {
 		let newToBalance = 0;
 		const currentFromBalance = balance[exchangeFromCurrency];
 		const currentToBalance = balance[exchangeToCurrency];
+
+		// If the balance is larger than the amount trying to be exchanged, perform the exchange
 		if (currentFromBalance > exchangeFromAmount) {
 			newFromBalance = currentFromBalance - exchangeFromAmount;
 			newToBalance = currentToBalance + Number(exchangeToAmount);
@@ -311,13 +319,22 @@ class App extends React.PureComponent {
 }
 
 const Wrapper = styled.div`
-	background: #E8E9EC;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	width: 100%;
+
+	@media (min-width: 700px) {
+		width: 50%;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
 `;
 
 const CurrencyWrapper = styled.div`
 	position: relative;
+	background: #E8E9EC;
 `;
 
 export default App;

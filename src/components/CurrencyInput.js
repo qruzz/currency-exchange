@@ -100,9 +100,9 @@ const Wrapper = styled.div`
 	background: ${props => props.style.color};
 	padding: 5% 0;
 
-	@media (min-width: 700px) {
+	/* @media (min-width: 700px) {
 		width: 45%;
-	}
+	} */
 `;
 
 const InnerWrapper = styled.div`

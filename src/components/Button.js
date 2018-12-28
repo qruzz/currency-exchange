@@ -54,6 +54,7 @@ const Wrapper = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	align-self: center;
 	border-radius: calc(12vh / 2);
 	outline: none;
 	background: ${props => (props.color)};
