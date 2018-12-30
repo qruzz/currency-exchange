@@ -14,7 +14,8 @@ export function getLatestExchangeRates(base) {
 		const json = await response.json();
 		return (json);
 	}).catch((error) => {
-		return (error);
+		console.log(error);
+		return ('TypeError');
 	});
 }
 
@@ -35,6 +36,6 @@ export function convertBetweenCurrencies(value, from, to) {
 		const json = await response.json();
 		return (json);
 	}).catch((error) => {
-		return (error);
+		return ({ error });
 	});
 }

@@ -91,9 +91,11 @@ class App extends React.PureComponent {
 
 		// Get the exchange rates from the API and set them in state
 		getLatestExchangeRates(exchangeFromCurrency).then((result) => {
-			this.setState({
-				exchangeRates: result,
-			});
+			if (typeof (result) !== 'string') {
+				this.setState({
+					exchangeRates: result,
+				});
+			}
 		});
 	}
 
@@ -268,6 +270,12 @@ class App extends React.PureComponent {
 			exchangeRates,
 			balance,
 		} = this.state;
+
+		if (exchangeRates) {
+			console.log(exchangeRates);
+			console.log('exchangeToCurrency: ', exchangeToCurrency);
+			console.log('rate for currency: ', exchangeRates.rates[exchangeToCurrency]);
+		}
 
 		return (
 			<Wrapper>
